@@ -1,5 +1,3 @@
-// src/pages/RegisterPage.jsx
-
 import React, { useState, useEffect } from 'react'; // Import useEffect
 import { Container, Box, Card, CardContent, Typography, TextField, Button, Grid, Link, Snackbar, Alert, CircularProgress } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
@@ -19,13 +17,9 @@ function RegisterPage() {
     message: '',
     severity: 'success',
   });
-
-  // --- NEW: Clear old user data when the page loads ---
   useEffect(() => {
-    // This ensures that if a previous user was logged in,
-    // their token is removed when a new user visits the register page.
     localStorage.removeItem('token');
-  }, []); // The empty array ensures this runs only once when the component mounts
+  }, []); 
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -43,18 +37,14 @@ function RegisterPage() {
       const response = await axios.post('http://localhost:3000/api/users/signup', formData);
 
       console.log("Registration successful:", response.data);
-
-      // --- CHANGE 1: Update the success message ---
       setNotification({
         open: true,
         message: 'Registration successful! Please log in.',
         severity: 'success',
       });
-      
-      // --- CHANGE 2: Navigate to the LOGIN page, not the dashboard ---
       setTimeout(() => {
         navigate('/login');
-      }, 2000); // 2 seconds to allow the user to read the message
+      }, 2000);
 
     } catch (error) {
       console.error("Registration error:", error.response?.data);
@@ -80,7 +70,6 @@ function RegisterPage() {
 
   return (
     <Container component="main" maxWidth="xs">
-      {/* ... The rest of your JSX form is perfectly fine and needs no changes ... */}
       <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Card sx={{ minWidth: 400, boxShadow: 3 }}>
             <CardContent sx={{ p: 3 }}>

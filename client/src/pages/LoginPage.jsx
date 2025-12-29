@@ -1,23 +1,15 @@
-// src/pages/LoginPage.jsx
-
 import React, { useState } from 'react';
 import { Container, Box, Card, CardContent, Typography, TextField, Button, Grid, Link, Snackbar, Alert, CircularProgress } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Import axios
+import axios from 'axios'; 
 
 function LoginPage() {
   const navigate = useNavigate();
-
-  // State for form data - only email and password needed for login
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-
-  // State for loading indicator
   const [loading, setLoading] = useState(false);
-
-  // State for the "toaster" notification (Snackbar)
   const [notification, setNotification] = useState({
     open: false,
     message: '',
@@ -31,21 +23,14 @@ function LoginPage() {
       [name]: value,
     }));
   };
-
-  // The main submit logic, now async
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
     try {
-      // Make the API call to your login endpoint
       const response = await axios.post('http://localhost:3000/api/users/login', formData);
 
       console.log("Login successful:", response.data);
-
-      // --- CRUCIAL STEP FOR LOGIN ---
-      // The backend should send back a token. Store it in localStorage.
-      // This token will be used to authenticate future requests.
       localStorage.setItem('token', response.data.token);
 
       // Show a success message
@@ -54,30 +39,22 @@ function LoginPage() {
         message: 'Login successful! Redirecting to your dashboard...',
         severity: 'success',
       });
-      
-      // Wait a moment for the user to see the success message, then navigate
       setTimeout(() => {
         navigate('/dashboard');
-      }, 1500); // 1.5 seconds delay
+      }, 1500);
 
     } catch (error) {
       console.error("Login error:", error.response?.data);
-      
-      // Determine the error message from the backend response, or show a generic one
       const errorMessage = error.response?.data?.message || 'Login failed. Please check your credentials.';
-      
-      // Show an error message
       setNotification({
         open: true,
         message: errorMessage,
         severity: 'error',
       });
     } finally {
-      setLoading(false); // Hide the loading spinner regardless of outcome
+      setLoading(false);
     }
   };
-
-  // Handler to close the snackbar
   const handleCloseNotification = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -147,8 +124,6 @@ function LoginPage() {
           </CardContent>
         </Card>
       </Box>
-
-      {/* The Toaster (Snackbar) component for notifications */}
       <Snackbar
         open={notification.open}
         autoHideDuration={6000}

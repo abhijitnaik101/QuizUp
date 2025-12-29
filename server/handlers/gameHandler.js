@@ -1,4 +1,3 @@
-// server/handlers/gameHandlers.js
 const GameSession = require('../models/GameSession');
 
 const activeTimers = {};

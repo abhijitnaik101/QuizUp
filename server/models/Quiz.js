@@ -1,5 +1,3 @@
-// server/models/Quiz.js
-
 const mongoose = require('mongoose');
 
 const quizSchema = new mongoose.Schema(
@@ -20,14 +18,12 @@ const quizSchema = new mongoose.Schema(
                     type: String,
                     required: [true, 'Question text cannot be empty.'],
                 },
-                // --- ADD THIS FIELD ---
                 timeLimit: {
                     type: Number,
-                    default: 20, // Default to 20 seconds
-                    min: 5,      // Minimum of 5 seconds
-                    max: 120,    // Maximum of 2 minutes
+                    default: 20,
+                    min: 5,    
+                    max: 120,  
                 },
-                // --- END OF ADDITION ---
                 options: {
                     type: [{
                         text: {
@@ -47,8 +43,6 @@ const quizSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
-
-// This validation hook is great, no changes needed.
 quizSchema.pre('save', function(next) {
     this.questions.forEach((question, index) => {
         const correctOptionsCount = question.options.filter(option => option.isCorrect).length;

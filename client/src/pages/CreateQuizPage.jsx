@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Box, Typography, Paper } from '@mui/material';
-import CreateQuizForm from '../components/forms/CreateQuizForm'; // We will create this next
+import CreateQuizForm from '../components/forms/CreateQuizForm';
 import Header from '../components/Header';
 
 function CreateQuizPage() {

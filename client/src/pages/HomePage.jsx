@@ -13,14 +13,9 @@ function HomePage() {
     event.preventDefault();
 
     if (!gameCode.trim() || !nickname.trim()) {
-      // You can add more robust error handling here later (e.g., a snackbar)
       alert('Please enter both a game code and a nickname.');
       return;
     }
-    
-    // Navigate to the game lobby page for the specific game code.
-    // We pass the nickname in the navigation state. This is a secure way
-    // to pass temporary data between pages without putting it in the URL.
     navigate(`/game/${gameCode.trim()}`, { state: { nickname: nickname.trim() } });
   };
 

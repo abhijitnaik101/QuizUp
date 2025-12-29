@@ -48,17 +48,12 @@ function QuizList() {
       setIsLoading(false);
     }
   }, []);
-
-  // Fetch quizzes when the component mounts
   useEffect(() => {
     fetchQuizzes();
   }, [fetchQuizzes]);
 
-
-  // --- Action Handlers ---
-
   const handleHostGame = async (quizId) => {
-    setActionInProgress(quizId); // Set loading state for this specific card
+    setActionInProgress(quizId); 
     const token = localStorage.getItem('token');
 
     try {

@@ -1,5 +1,3 @@
-// server/models/GameSession.js
-
 const mongoose = require('mongoose');
 
 const gameSessionSchema = new mongoose.Schema(
@@ -10,7 +8,7 @@ const gameSessionSchema = new mongoose.Schema(
         hostSocketId: { type: String, required: false },
         currentState: { type: String, enum: ['Lobby', 'Question', 'Results', 'Finished'], default: 'Lobby' },
         currentQuestionIndex: { type: Number, default: 0 },
-        questionStartTime: { type: Date }, // This field is used for scoring
+        questionStartTime: { type: Date },
         players: [{
             socketId: { type: String, required: true },
             nickname: { type: String, required: true },
@@ -18,11 +16,9 @@ const gameSessionSchema = new mongoose.Schema(
             answers: [{
                 questionIndex: { type: Number, required: true },
                 answerText: { type: String, required: true },
-                // --- ADD THIS FIELD ---
                 timeTaken: {
-                    type: Number, // Stored in milliseconds
+                    type: Number, 
                 },
-                // --- END OF ADDITION ---
             }]
         }],
     },

@@ -1,7 +1,5 @@
 const GameSession = require('../models/GameSession');
-const Quiz = require('../models/quiz'); // Assuming the quiz model is in this path
-
-// Helper to generate a unique 6-digit code
+const Quiz = require('../models/Quiz'); 
 const generateUniqueGameCode = async () => {
     let gameCode;
     let isUnique = false;

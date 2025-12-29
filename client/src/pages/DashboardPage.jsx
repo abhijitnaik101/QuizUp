@@ -1,14 +1,11 @@
-// src/pages/DashboardPage.jsx
-
 import React from 'react';
 import { Container, Box, Typography, Button, Grid } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
-import QuizList from '../components/QuizList'; // We import the smart component
-import Header from '../components/Header'; // Assuming you have a Header component
+import QuizList from '../components/QuizList'; 
+import Header from '../components/Header'; 
 
 function DashboardPage() {
-  // In a real app, you might get the user's name from a global state/context
   const username = "Host"; 
 
   return (
