@@ -16,13 +16,12 @@ const generateUniqueGameCode = async () => {
 const createGameSession = async (req, res) => {
     try {
         const { quizId } = req.body;
-        const hostUserId = req.user.id; // From your 'protect' middleware
+        const hostUserId = req.user.id; 
 
         if (!quizId) {
             return res.status(400).json({ message: 'Quiz ID is required.' });
         }
         
-        // Validation: Ensure the quiz exists and the user owns it
         const quiz = await Quiz.findById(quizId);
         if (!quiz || quiz.createdBy.toString() !== hostUserId) {
             return res.status(403).json({ message: 'Not authorized to host this quiz.' });
@@ -30,13 +29,11 @@ const createGameSession = async (req, res) => {
 
         const newGameCode = await generateUniqueGameCode();
         
-        // The key is to associate the host's USER ID with the session upon creation.
-        // Let's add a 'host' field to the schema.
         const newGame = new GameSession({
             gameCode: newGameCode,
             quiz: quizId,
-            hostId: hostUserId, // <-- We need to add this to the schema
-            players: [], // Explicitly start with an empty players array
+            hostId: hostUserId,
+            players: [], 
         });
         
         await newGame.save();

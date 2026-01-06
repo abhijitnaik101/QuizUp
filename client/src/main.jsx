@@ -9,12 +9,10 @@ const defaultTheme = createTheme();
 
 // This is the correct structure.
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <RecoilRoot>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <App />
       </ThemeProvider>
     </RecoilRoot>
-  </React.StrictMode>
 );
